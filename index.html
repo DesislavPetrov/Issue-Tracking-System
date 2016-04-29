@@ -7,8 +7,10 @@
     <meta charset="UTF-8">
     <title>Issue Tracking System</title>
 </head>
-<body>
-
+<body ng-app="app" ng-controller="AppController">
+<div id="container">
+    {{name}}
+</div>
 
 <script src="app/js/node_modules/jquery/dist/jquery.js"></script>
 <script src="app/js/node_modules/noty/js/noty/jquery.noty.js"></script>
@@ -17,5 +19,7 @@
 <script src="app/js/node_modules/angular-route/angular-route.js"></script>
 <script src="app/js/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="app/js/node_modules/angular-ui-bootstrap/src/pagination/pagination.js"></script>
+<script src="app/js/app.js"></script>
+<script src="app/js/controllers/appController.js"></script>
 </body>
 </html>
