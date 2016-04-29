@@ -8,18 +8,26 @@
     <title>Issue Tracking System</title>
 </head>
 <body ng-app="app" ng-controller="AppController">
-<div id="container">
-    {{name}}
-</div>
 
-<script src="app/js/node_modules/jquery/dist/jquery.js"></script>
-<script src="app/js/node_modules/noty/js/noty/jquery.noty.js"></script>
+<div class="app-content">
+    <div class='col-md-8' ng-view></div>
+</div>
 <script src="app/js/node_modules/angular/angular.js"></script>
 <script src="app/js/node_modules/angular-resource/angular-resource.js"></script>
 <script src="app/js/node_modules/angular-route/angular-route.js"></script>
+<script src="app/js/node_modules/jquery/dist/jquery.js"></script>
+<script src="app/js/node_modules/noty/jquery.noty.js"></script>
 <script src="app/js/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="app/js/node_modules/angular-ui-bootstrap/src/pagination/pagination.js"></script>
+
 <script src="app/js/app.js"></script>
+
+<script src="app/js/services/authService.js"></script>
+<script src="app/js/services/notifyService.js"></script>
+
 <script src="app/js/controllers/appController.js"></script>
+<script src="app/js/controllers/welcomeController.js"></script>
+<script src="app/js/controllers/registerController.js"></script>
+<script src="app/js/controllers/loginController.js"></script>
 </body>
 </html>
