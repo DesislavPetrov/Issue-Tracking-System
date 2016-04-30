@@ -3,18 +3,18 @@
     <form name="form" role="form">
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" name="username" id="email" class="form-control" ng-model="userData.email" required />
+            <input type="email" name="email" id="email" class="form-control" ng-model="user.email" required />
         </div>
         <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" class="form-control" ng-model="userData.password" ng-minlength="6" ng-maxlength="100" required />
+            <label for="regPassword">Password:</label>
+            <input type="password" name="password" id="regPassword" class="form-control" ng-model="regUser.password" ng-minlength="6" ng-maxlength="100" required />
         </div>
         <div class="form-group">
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" ng-model="userData.confirmPassword" ng-minlength="6" ng-maxlength="100" required />
+            <label for="regConfirmPassword">Confirm Password:</label>
+            <input type="password" name="confirmPass" id="regConfirmPassword" class="form-control" ng-model="regUser.confirmPassword" ng-minlength="6" ng-maxlength="100" required />
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary" ng-click="register(userData)">Register</button>
+            <button type="submit" class="btn btn-primary" ng-click="register(regUser)">Register</button>
             <a href="#/login" class="btn btn-link">Login</a>
         </div>
     </form>

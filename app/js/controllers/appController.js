@@ -1,4 +1,4 @@
-app.controller('AppController', ['$scope', 'authService',
-    function($scope, authService){
-        $scope.authService = authService;
+app.controller('AppController', ['$scope', 'authenticationService',
+    function($scope, authenticationService){
+        $scope.authenticationService = authenticationService;
     }]);
