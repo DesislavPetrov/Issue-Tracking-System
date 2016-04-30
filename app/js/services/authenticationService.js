@@ -1,5 +1,5 @@
-app.factory('authenticationService', ['$http', '$q', 'headerService', 'BASE_SERVICE_URL',
-    function ($http, $q, headerService, BASE_SERVICE_URL){
+app.factory('authenticationService', ['$http', '$q', 'headerService', 'notifyService', 'BASE_SERVICE_URL',
+    function ($http, $q, headerService, notifyService, BASE_SERVICE_URL){
         function register (user){
             var deferred = $q.defer();
             $http.post(BASE_SERVICE_URL + 'api/account/register', user)
@@ -25,8 +25,40 @@ app.factory('authenticationService', ['$http', '$q', 'headerService', 'BASE_SERV
             return deferred.promise;
         }
 
+        function getCurrent(){
+            var deferred = $q.defer();
+            $http.get(BASE_SERVICE_URL + 'users/me', headerService.getAuthHeader())
+                .then(function (success){
+                    deferred.resolve(success.data);
+                }, function (error){
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
+        function changePassword (oldPassword, newPassword, confirmNewPassword){
+            if(newPassword != confirmNewPassword){
+                notifyService.showInfo('Passwords do not match');
+                return;
+            }
+
+            var deferred = $q.defer();
+            var data = 'OldPassword=' + oldPassword + '&NewPassword=' + newPassword + '&ConfirmPassword=' + confirmNewPassword;
+            $http.post(BASE_SERVICE_URL + 'api/account/changePassword', data, headerService.getAuthAndWWWContentHeader())
+                .then(function(success){
+                    deferred.resolve(success);
+                }, function(error){
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
         return {
             register : register,
-            login : login
+            login : login,
+            getCurrent : getCurrent,
+            changePassword : changePassword
         }
     }]);

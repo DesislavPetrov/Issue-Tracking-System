@@ -31,6 +31,11 @@ app.config(['$routeProvider', function ($routeProvider){
         redirectTo: '#/login'
     });
 
+    $routeProvider.when('/profile/password', {
+        templateUrl: 'app/views/passwordChange.html',
+        controller: 'PasswordChangeController'
+    });
+
     $routeProvider.otherwise(
         { redirectTo: '/' }
     );
