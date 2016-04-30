@@ -26,6 +26,11 @@ app.config(['$routeProvider', function ($routeProvider){
         controller: 'HomeController'
     });
 
+    $routeProvider.when('/logout', {
+        controller: 'LogoutController',
+        redirectTo: '#/login'
+    });
+
     $routeProvider.otherwise(
         { redirectTo: '/' }
     );
