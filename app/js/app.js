@@ -21,6 +21,11 @@ app.config(['$routeProvider', function ($routeProvider){
         controller : 'LoginController'
     });
 
+    $routeProvider.when('/', {
+        templateUrl: 'app/views/home.html',
+        controller: 'HomeController'
+    });
+
     $routeProvider.otherwise(
         { redirectTo: '/' }
     );
