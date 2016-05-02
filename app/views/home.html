@@ -12,11 +12,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr ng-repeat="assignedIssue in assignedIssues" ng-click="goToIssue(assignedIssue.Id)">
+                        <td>{{assignedIssue.Title}}</td>
+                        <td>{{assignedIssue.Description}}</td>
+                        <td>{{assignedIssue.Project.Name}}</td>
+                        <td>{{assignedIssue.DueDate | date: 'mediumDate'}}</td>
                     </tr>
                 </tbody>
             </table>

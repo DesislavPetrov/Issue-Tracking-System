@@ -3,6 +3,7 @@ var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap']);
 app.constant('BASE_SERVICE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
 app.constant('PASSWORD_MIN_LENGTH', 6);
 app.constant('PASSWORD_MAX_LENGTH', 100);
+app.constant('ISSUES_PER_PAGE', 10);
 
 app.config(['$routeProvider', function ($routeProvider){
 
