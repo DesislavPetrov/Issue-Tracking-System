@@ -22,6 +22,8 @@ app.controller ('HomeController', ['$scope', '$location', 'authenticationService
             'filter': ''
         };
 
+        $scope.itemsPerPage = ISSUES_PER_PAGE;
+
         // The backend supports descending sorting, just add “desc” after the property (for example “IssueKey desc”)
         $scope.getIssues = function (){
             issuesService.getCurrentUserAssignedIssues('DueDate desc', $scope.projectsParams1.pageSize, $scope.projectsParams1.startPage)
@@ -74,4 +76,12 @@ app.controller ('HomeController', ['$scope', '$location', 'authenticationService
                 })
         };
         $scope.getLedProjects();
+
+        $scope.goToProject = function(id){
+            $location.path('projects/' + id);
+        };
+
+        $scope.goToIssue = function(id){
+            $location.path('issues/' + id);
+        }
     }]);
