@@ -59,4 +59,19 @@ app.controller ('HomeController', ['$scope', '$location', 'authenticationService
                 })
         };
         $scope.getProjectsWithAssignedIssues();
+
+        $scope.getLedProjects = function(){
+            $scope.projectsWithAssignedIssues = [];
+            authenticationService.getCurrent()
+                .then(function(currentUserData){
+                    projectService.getProjectsByFilter('Lead.Username', currentUserData.Username, $scope.projectsParams3.pageSize, $scope.projectsParams3.startPage)
+                        .then(function(projects){
+                            $scope.totalLedProjects = projects.data.TotalCount;
+                            $scope.projectsLead = projects.data.Projects;
+                        }, function(error){
+                            console.error(error);
+                        })
+                })
+        };
+        $scope.getLedProjects();
     }]);
