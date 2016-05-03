@@ -20,6 +20,18 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
             return deferred.promise;
         }
 
+        function getAllIssuesForOneProject (projectId){
+            var deferred = $q.defer();
+            var projectUrl = BASE_SERVICE_URL + 'projects/' + projectId + '/issues';
+            $http.get(projectUrl, headerService.getAuthHeader())
+                .then(function(success){
+                    deferred.resolve(success.data);
+                }, function(error){
+                    deferred.reject(error);
+                });
+            return deferred.promise;
+        }
+
         function addIssue (title, description, dueDate, projectid, assigneeId, priorityId, labels){
             var issue = {
                 Title : title,
@@ -48,7 +60,8 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
 
         return {
             getCurrentUserAssignedIssues : getCurrentUserAssignedIssues,
-            addIssue : addIssue
+            addIssue : addIssue,
+            getAllIssuesForOneProject : getAllIssuesForOneProject
         }
     }
 ]);
