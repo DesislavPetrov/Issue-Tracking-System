@@ -37,6 +37,11 @@ app.config(['$routeProvider', function ($routeProvider){
         controller: 'PasswordChangeController'
     });
 
+    $routeProvider.when('/projects/:id', {
+        templateUrl : 'app/views/project.html',
+        controller : 'ProjectController'
+    });
+
     $routeProvider.otherwise(
         { redirectTo: '/' }
     );

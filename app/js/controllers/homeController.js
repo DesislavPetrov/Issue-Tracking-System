@@ -1,5 +1,5 @@
-app.controller ('HomeController', ['$scope', '$location', 'authenticationService', 'ISSUES_PER_PAGE', 'issuesService',
-    function($scope, $location, authenticationService, ISSUES_PER_PAGE, issuesService){
+app.controller ('HomeController', ['$scope', '$location', 'authenticationService', 'ISSUES_PER_PAGE', 'issuesService', 'projectService',
+    function($scope, $location, authenticationService, ISSUES_PER_PAGE, issuesService, projectService){
         if (!sessionStorage['authToken']) {
             $location.path('/login');
         }
@@ -31,4 +31,32 @@ app.controller ('HomeController', ['$scope', '$location', 'authenticationService
                 });
         };
         $scope.getIssues();
+
+        $scope.getProjectsWithAssignedIssues = function(){
+            $scope.totalProjectsWithAssignedIssues = [];
+            issuesService.getCurrentUserAssignedIssues('DueDate', $scope.projectsParams2.pageSize, $scope.projectsParams2.startPage)
+                .then(function(success){
+                    var uniqueProjectIds = [];
+                    if(success.Issues.length > 0){
+                        success.Issues.forEach(function(issue){
+                            uniqueProjectIds[issue.Project.Id] = issue.Project.Id;
+                        });
+                    }
+
+                    if(uniqueProjectIds){
+                        uniqueProjectIds.forEach(function(id){
+                            projectService.getProjectById(id)
+                                .then(function(success){
+                                    $scope.totalProjectsWithAssignedIssues.push(success)
+                                }, function(error){
+                                    console.error(error);
+                                })
+                        })
+                    }
+                    $scope.totalProjectsIssues = $scope.totalProjectsWithAssignedIssues.count || 0;
+                }, function(error){
+                    console.error(error);
+                })
+        };
+        $scope.getProjectsWithAssignedIssues();
     }]);
