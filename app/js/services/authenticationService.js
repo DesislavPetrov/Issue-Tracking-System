@@ -55,10 +55,26 @@ app.factory('authenticationService', ['$http', '$q', 'headerService', 'notifySer
             return deferred.promise;
         }
 
+        function getAllUsers (){
+            var deferred = $q.defer();
+            var usersUrl = BASE_SERVICE_URL + 'users/';
+            $http.get(usersUrl, headerService.getAuthHeader())
+                .then(function(success){
+                    var users = success.data.sort(function(a,b){
+                        return a.Username.localeCompare(b.Username);
+                    });
+                    deferred.resolve(users);
+                }, function (error){
+                    deferred.reject(error);
+                })
+            return deferred.promise;
+        }
+
         return {
             register : register,
             login : login,
             getCurrent : getCurrent,
-            changePassword : changePassword
+            changePassword : changePassword,
+            getAllUsers : getAllUsers
         }
     }]);

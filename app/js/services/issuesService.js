@@ -66,16 +66,45 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
                     deferred.resolve(success.data);
                 }, function(error){
                     deferred.reject(error);
-                })
+                });
 
             return deferred.promise;
         }
+
+        function updateIssue(id, title, description, dueDate, assigneeId, priorityId, labels){
+            var issue = {
+                Title : title,
+                Description : description,
+                DueDate : dueDate,
+                AssigneeId : assigneeId,
+                PriorityId : priorityId,
+                Labels : []
+            };
+
+            labels.forEach(function(label){
+                issue.Labels.push({Name : label});
+            });
+
+            var deferred = $q.defer();
+            var issueUrl = BASE_SERVICE_URL + 'issues/' + id;
+            $http.put(issueUrl, headerService.getAuthHeader())
+                .then(function(success){
+                    deferred.resolve(success.data);
+                }, function(error){
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
+
 
         return {
             getCurrentUserAssignedIssues : getCurrentUserAssignedIssues,
             addIssue : addIssue,
             getAllIssuesForOneProject : getAllIssuesForOneProject,
-            getIssueById : getIssueById
+            getIssueById : getIssueById,
+            updateIssue : updateIssue
         }
     }
 ]);
