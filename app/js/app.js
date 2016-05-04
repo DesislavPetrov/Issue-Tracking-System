@@ -57,6 +57,11 @@ app.config(['$routeProvider', function ($routeProvider){
         controller : 'EditProjectController'
     });
 
+    $routeProvider.when('/projects/:id/add-issue', {
+        templateUrl : 'app/views/add-issue.html',
+        controller : 'AddIssueController'
+    });
+
     $routeProvider.otherwise(
         { redirectTo: '/' }
     );

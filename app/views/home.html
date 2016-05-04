@@ -12,7 +12,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="assignedIssue in assignedIssues" ng-click="goToIssue(assignedIssue.Id)">
+                    <tr ng-repeat="assignedIssue in assignedIssues" ng-click="goToIssue(assignedIssue.Id)" class="link">
                         <td>{{assignedIssue.Title}}</td>
                         <td>{{assignedIssue.Description}}</td>
                         <td>{{assignedIssue.Project.Name}}</td>
@@ -31,11 +31,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="projectIssue in totalProjectsWithAssignedIssues" ng-click="goToProject(projectIssue.Id)">
+                <tr ng-repeat="projectIssue in totalProjectsWithAssignedIssues" ng-click="goToProject(projectIssue.Id)" class="link">
                     <td>{{projectIssue.Name}}</td>
                     <td>{{projectIssue.Lead.Username}}</td>
                     <td>{{userId}}</td>
-                    <td><span class="label label-default" ng-repeat="label in projectIssue.Labels">{{label.Name}}</span></td>
+                    <td><span class="label label-default" ng-repeat="label in projectIssue.Labels" class="link">{{label.Name}}</span></td>
                 </tr>
                 </tbody>
             </table>

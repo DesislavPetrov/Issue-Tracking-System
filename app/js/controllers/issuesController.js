@@ -14,11 +14,11 @@ app.controller('IssuesController', ['$scope', '$routeParams', 'issuesService', '
         $scope.getIssueById();
 
         $scope.openEditIssue = function(){
-            $location.path('issues/' + $routeParams.id + '/edit');
+            $location.path('/issues/' + $routeParams.id + '/edit');
         };
 
-        $scope.backToProject = function(){
-            $location.path('/projects' + $scope.currentIssue.Project.Id);
+        $scope.goToHomepage = function(){
+            $location.path('/');
         };
     }
 ]);

@@ -48,7 +48,7 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
             });
 
             var deferred = $q.defer();
-            $http.put(BASE_SERVICE_URL + 'issues/' + id, issue, headerService.getAuthHeader())
+            $http.post(BASE_SERVICE_URL + 'issues/', issue, headerService.getAuthHeader())
                 .then(function (success) {
                     deferred.resolve(success.data);
                 }, function (error) {
