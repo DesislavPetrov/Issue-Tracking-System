@@ -1,7 +1,7 @@
 app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService',
     function ($http, $q, BASE_SERVICE_URL, headerService){
         function getCurrentUserAssignedIssues (orderBy, pageSize, pageNumber){
-            var issuesUrl = BASE_SERVICE_URL + 'issues/me/?orderBy=' + orderBy;
+            var issuesUrl = BASE_SERVICE_URL + 'issues/me?orderBy=' + orderBy;
             if(pageSize){
                 issuesUrl += '&pageSize=' + pageSize;
             }

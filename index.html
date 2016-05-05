@@ -10,7 +10,7 @@
 </head>
 <body ng-app="app" ng-controller="AppController">
 
-<div navigation-directive></div>
+<div navigation-directive ng-show="hasLogged()"></div>
 
 <div class="app-content">
     <div class='col-md-8' ng-view></div>
