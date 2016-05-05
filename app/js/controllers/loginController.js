@@ -4,21 +4,15 @@ app.controller('LoginController', ['$scope', '$location', 'authenticationService
             authenticationService.login(loginUser)
                 .then(function(success){
                     sessionStorage['authToken'] = success.data['access_token'];
-                    notifyService.showInfo("Login successful");
                     $location.path('/');
+                    authenticationService.getCurrent().then(function(userDetails) {
+                        notifyService.showInfo('Login successful');
+                        sessionStorage['userId'] = userDetails.Id;
+                        sessionStorage['isAdmin'] = userDetails.isAdmin;
+                        sessionStorage['username'] = userDetails.Username;
+                    });
                 }, function (error) {
                     notifyService.showError("Login failed", error);
                 });
-        };
-
-        $scope.register = function (regUser) {
-            authenticationService.register(regUser)
-                .then(function (success) {
-                    sessionStorage['authToken'] = success.data['access_token'];
-                    notifyService.showInfo("Registration successful");
-                    $location.path('/');
-                }, function (error) {
-                    notifyService.showError("Registration failed", error);
-                })
         };
     }]);

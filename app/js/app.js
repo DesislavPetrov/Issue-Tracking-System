@@ -19,7 +19,7 @@ app.config(['$routeProvider', function ($routeProvider){
 
     $routeProvider.when('/register', {
         templateUrl : 'app/views/register.html',
-        controller : 'LoginController'
+        controller : 'RegisterController'
     });
 
     $routeProvider.when('/', {

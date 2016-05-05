@@ -66,7 +66,7 @@ app.factory('authenticationService', ['$http', '$q', 'headerService', 'notifySer
                     deferred.resolve(users);
                 }, function (error){
                     deferred.reject(error);
-                })
+                });
             return deferred.promise;
         }
 
