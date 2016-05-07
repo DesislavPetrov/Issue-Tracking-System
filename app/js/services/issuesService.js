@@ -97,6 +97,30 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
             return deferred.promise;
         }
 
+        function getComments(issueId){
+            var commentsUrl = BASE_SERVICE_URL + 'issues/' + issueId + '/comments';
+            var deferred = $q.defer();
+            $http.get(commentsUrl, headerService.getAuthHeader())
+                .then(function(success){
+                    deferred.resolve(success.data);
+                }, function(error){
+                    deferred.error(error);
+                });
+            return deferred.promise;
+        }
+
+
+        function addComment(issueId, commentText){
+            var commentsUrl = BASE_SERVICE_URL + 'issues/' + issueId + '/comments';
+            var deferred = $q.defer();
+            $http.post(commentsUrl, {Text : commentText}, headerService.getAuthHeader())
+                .then(function(success){
+                    deferred.resolve(success.data);
+                }, function (error){
+                    deferred.reject(error);
+                });
+            return deferred.promise;
+        }
 
 
         return {
@@ -104,7 +128,9 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
             addIssue : addIssue,
             getAllIssuesForOneProject : getAllIssuesForOneProject,
             getIssueById : getIssueById,
-            updateIssue : updateIssue
+            updateIssue : updateIssue,
+            getComments : getComments,
+            addComment : addComment
         }
     }
 ]);

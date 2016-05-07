@@ -1,5 +1,5 @@
-app.controller('IssuesController', ['$scope', '$routeParams', 'issuesService', '$location', '$route', 'projectService',
-    function($scope, $routeParams, issuesService, $location, $route, projectService){
+app.controller('IssuesController', ['$scope', '$routeParams', 'issuesService', '$location', '$route', 'projectService', 'notifyService',
+    function($scope, $routeParams, issuesService, $location, $route, projectService, notifyService){
         $scope.getIssueById = function(){
             issuesService.getIssueById($routeParams.id)
                 .then(function (success) {
@@ -15,6 +15,25 @@ app.controller('IssuesController', ['$scope', '$routeParams', 'issuesService', '
 
         $scope.openEditIssue = function(){
             $location.path('/issues/' + $routeParams.id + '/edit');
+        };
+
+        function getComments(){
+            issuesService.getComments($routeParams.id)
+                .then(function(success){
+                    $scope.issueComments = success;
+                })
+        }
+        getComments();
+
+        $scope.addComment = function(){
+            issuesService.addComment($routeParams.id, $scope.addCommentDescription)
+                .then(function(){
+                    getComments();
+                    notifyService.showInfo('Comment has been added');
+                    $route.reload();
+                }, function(error){
+                    console.error(error);
+                })
         };
 
         $scope.goToHomepage = function(){
