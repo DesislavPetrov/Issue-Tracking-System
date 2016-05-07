@@ -36,6 +36,17 @@ app.controller('IssuesController', ['$scope', '$routeParams', 'issuesService', '
                 })
         };
 
+        $scope.changeStatus = function(){
+            var newStatus = $scope.newStatus;
+            issuesService.changeStatus($routeParams.id, newStatus)
+                .then(function(){
+                    notifyService.showInfo('Status has been changed');
+                    $route.reload();
+                }, function(error){
+                    console.error(error);
+                })
+        };
+
         $scope.goToHomepage = function(){
             $location.path('/');
         };

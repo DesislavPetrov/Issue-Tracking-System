@@ -122,6 +122,18 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
             return deferred.promise;
         }
 
+        function changeStatus(issueId, statusId){
+            var statusUrl = BASE_SERVICE_URL + 'issues/' + issueId + '/changestatus?statusid=' + statusId;
+            var deferred = $q.defer();
+            $http.put(statusUrl, undefined, headerService.getAuthHeader())
+                .then(function(success){
+                    deferred.resolve(success.data);
+                }, function(error){
+                deferred.reject(error);
+            });
+            return deferred.promise;
+        }
+
 
         return {
             getCurrentUserAssignedIssues : getCurrentUserAssignedIssues,
@@ -130,7 +142,8 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
             getIssueById : getIssueById,
             updateIssue : updateIssue,
             getComments : getComments,
-            addComment : addComment
+            addComment : addComment,
+            changeStatus : changeStatus
         }
     }
 ]);
