@@ -32,19 +32,19 @@ app.factory('issuesService', ['$http', '$q', 'BASE_SERVICE_URL', 'headerService'
             return deferred.promise;
         }
 
-        function addIssue (title, description, dueDate, projectid, assigneeId, priorityId, labels){
+        function addIssue (title, description, dueDate, projectId, assigneeId, priorityId, labels){
             var issue = {
                 Title : title,
                 Description : description,
                 DueDate : dueDate,
-                ProjectId : projectid,
+                ProjectId : projectId,
                 AssigneeId : assigneeId,
                 PriorityId : priorityId,
                 Labels : []
             };
 
-            labels.forEach(function (issueName){
-                issue.Labels.push({Name:issueName})
+            labels.forEach(function (l){
+                issue.Labels.push({Name:l})
             });
 
             var deferred = $q.defer();
