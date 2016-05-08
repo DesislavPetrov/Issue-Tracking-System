@@ -15,7 +15,7 @@ app.factory('authenticationService', ['$http', '$q', 'headerService', 'notifySer
         function login (user){
             var deferred = $q.defer();
             var data = 'grant_type=password&username=' + user.email + '&password=' + user.password;
-            $http.post(BASE_SERVICE_URL + 'api/token', data, headerService.getWWWContentHeader())
+            $http.post(BASE_SERVICE_URL + 'api/token', data, headerService.getAuthHeader())
                 .then(function(success){
                     deferred.resolve(success);
                 }, function (error){

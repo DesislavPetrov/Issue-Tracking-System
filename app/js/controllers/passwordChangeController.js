@@ -1,5 +1,5 @@
-app.controller('PasswordChangeController', ['$scope', '$route', 'authenticationService',
-    function ($scope, $route, authenticationService){
+app.controller('PasswordChangeController', ['$scope', '$route', 'authenticationService','notifyService',
+    function ($scope, $route, authenticationService, notifyService){
         authenticationService.getCurrent()
             .then(function (success) {
                 $scope.currentUser = success;
@@ -11,6 +11,7 @@ app.controller('PasswordChangeController', ['$scope', '$route', 'authenticationS
                 $scope.newPassword,
                 $scope.confirmPassword
             ).then(function(success){
+                notifyService.showInfo('Password has been changed');
                 $route.reload();
             })
         }
